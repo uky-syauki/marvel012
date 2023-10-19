@@ -151,13 +151,13 @@
         }
     </style>
     <div>
-        <img class="gambar" src="img/logo.png" alt="">
+        <img class="gambar" src="{{ url_for('static', filename='img/logo.png')}}" alt="">
     </div>
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="masthead mb-auto">
             <div class="inner">
                 <h3 class="masthead-brand">
-                    <img class="logo" src="img/coconut.png" alt="" width="100px">
+                    <img class="logo" src="{{ url_for('static', filename='img/coconut.png') }}" alt="" width="100px">
                 </h3>
                 <nav class="nav nav-masthead justify-content-center">
                     <a class="nav-link active" href="#">Home</a>

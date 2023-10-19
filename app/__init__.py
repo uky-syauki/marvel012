@@ -1,9 +1,9 @@
-from flask import FLask
+from flask import FLask, render_template, url_for
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return "Bismillah"
+	return render_template('index.html')
 
 
