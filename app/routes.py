@@ -17,5 +17,5 @@ def getData():
 @app.route('/api/postData', methods=['POST'])
 def postData():
 	data = request.get_json()
-	respon = {'pesan':'Data Telah diterima'}
+	respon = {'pesan':f'Data Telah diterima, data:{data}'}
 	return jsonify(respon)
