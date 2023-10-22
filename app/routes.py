@@ -11,8 +11,25 @@ def index():
 
 @app.route('/api/getData', methods=['GET'])
 def getData():
-	data = {'nama':"Ahmad Syauki"}
-	return jsonify(data)
+	daftar_calgot = calgot.query.all()
+	for isi in daftar_calgot:
+		print(isi.id)
+	data_jsom = []
+	for baris in daftar_calgot:
+		data_jsom.append({
+			'id':baris.id,
+			'nama_lengkap':baris.nama_lengkap,
+			'nama_panggilan':baris.nama_panggilan,
+			'jenis_kelamin':baris.jenis_kelamin,
+			'nomor_wa':baris.nomor_wa,
+			'email':baris.email,
+			'alamat':baris.alamat,
+			'kampus':baris.kampus,
+			'foto':baris.foto,
+			'tanggal':baris.timestamp,
+			'alasan':baris.alasan
+		})
+	return jsonify(data_jsom)
 
 
 @app.route('/api/postData', methods=['POST'])
