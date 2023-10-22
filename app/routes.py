@@ -3,10 +3,22 @@ from flask import render_template, url_for, jsonify, request
 from app import app, db
 from app.models import calgot
 
+import os
+
 @app.route('/')
 @app.route('/index')
 def index():
 	return render_template('index.html')
+
+
+@app.route('/pendaftar')
+def pendaftar():
+	return render_template('pendaftar.html')
+
+@app.route('/daftar')
+def daftar():
+	return render_template('daftar.html')
+
 
 
 @app.route('/api/getData', methods=['GET'])
@@ -25,7 +37,8 @@ def getData():
 			'email':baris.email,
 			'alamat':baris.alamat,
 			'kampus':baris.kampus,
-			'foto':baris.foto,
+			'jurusan':baris.jurusan,
+			'foto':baris.foto[11:],
 			'tanggal':baris.timestamp,
 			'alasan':baris.alasan
 		})
@@ -35,18 +48,36 @@ def getData():
 @app.route('/api/postData', methods=['POST'])
 def postData():
 	nama_lengkap = request.form.get('nama_lengkap')
-	add_calgot = calgot(
-		nama_lengkap=request.form.get('nama_lengkap'),
-		nama_panggilan=request.form.get('nama_panggilan'),
-		jenis_kelamin=request.form.get('jenis_kelamin'),
-		email=request.form.get('email'),
-		nomor_wa=request.form.get('nomor_wa'),
-		alamat=request.form.get('alamat'),
-		kampus=request.form.get('kampus'),
-		alasan=request.form.get('alasan')
-	)
-	db.session.add(add_calgot)
-	db.session.commit()
+	
+
+	try:
+		photo = request.files['photo']
+		nama_lengkap = nama_lengkap.replace(' ','_').replace(',','').replace('.','')
+		photo_path = os.path.join("app/static/foto_calgot", nama_lengkap+'.jpg')
+		photo.save(photo_path)
+		add_calgot = calgot(
+			nama_lengkap=request.form.get('nama_lengkap'),
+			nama_panggilan=request.form.get('nama_panggilan'),
+			jenis_kelamin=request.form.get('jenis_kelamin'),
+			email=request.form.get('email'),
+			nomor_wa=request.form.get('nomor_wa'),
+			alamat=request.form.get('alamat'),
+			kampus=request.form.get('kampus'),
+			jurusan=request.form.get('jurusan'),
+			foto=photo_path,
+			alasan=request.form.get('alasan')
+		)
+		db.session.add(add_calgot)
+		db.session.commit()
+		print(f"Calgot {nama_lengkap} berhasil di daftar")
+	except:
+		print("photo Error")
+	
+	
+
+	# db.session.add(add_calgot)
+	# db.session.commit()
+	print(nama_lengkap)
 	# print(nama_lengkap)
 	# data = request.get_json()
 	# respon = {'pesan':f'Data Telah diterima, data:{data}'}

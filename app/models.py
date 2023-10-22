@@ -12,6 +12,7 @@ class calgot(db.Model):
     email = Column(String(64))
     alamat = Column(String(128))
     kampus = Column(String(64))
+    jurusan = Column(String(20))
     foto = Column(String(64), default="tidak_ada.jpg")
     alasan = Column(String(120))
     timestamp = Column(DateTime, default=datetime.utcnow)
