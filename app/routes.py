@@ -2,6 +2,7 @@ from flask import render_template, url_for, jsonify, request
 
 from app import app, db
 from app.models import calgot
+from app.forms import CalgotForm
 
 import os
 
@@ -9,6 +10,12 @@ import os
 @app.route('/index')
 def index():
 	return render_template('index.html')
+
+
+@app.route('/newDaftar', methods=['GET','POST'])
+def newDaftar():
+	form = CalgotForm()
+	return render_template('daftar2.html', form=form)
 
 
 @app.route('/pendaftar')
@@ -45,11 +52,9 @@ def getData():
 	return jsonify(data_jsom)
 
 
-@app.route('/api/postData', methods=['POST'])
+@app.route('/api/postData', methods=['GET','POST'])
 def postData():
 	nama_lengkap = request.form.get('nama_lengkap')
-	
-
 	try:
 		photo = request.files['photo']
 		nama_lengkap = nama_lengkap.replace(' ','_').replace(',','').replace('.','')
@@ -70,17 +75,18 @@ def postData():
 		db.session.add(add_calgot)
 		db.session.commit()
 		print(f"Calgot {nama_lengkap} berhasil di daftar")
+		return {'status': 'success'}
 	except:
-		print("photo Error")
+		return {'status': 'error'}
+
 	
 	
 
 	# db.session.add(add_calgot)
 	# db.session.commit()
-	print(nama_lengkap)
+	# print(nama_lengkap)
 	# print(nama_lengkap)
 	# data = request.get_json()
 	# respon = {'pesan':f'Data Telah diterima, data:{data}'}
 	# print(data)
 	# print(data.keys())
-	return {'status': 'success'}
