@@ -12,8 +12,8 @@ def index():
 @app.route('/api/getData', methods=['GET'])
 def getData():
 	daftar_calgot = calgot.query.all()
-	for isi in daftar_calgot:
-		print(isi.id)
+	# for isi in daftar_calgot:
+	# 	print(isi.id)
 	data_jsom = []
 	for baris in daftar_calgot:
 		data_jsom.append({
