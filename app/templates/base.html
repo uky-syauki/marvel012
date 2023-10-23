@@ -26,7 +26,6 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ url_for('static', filename='assets/css/style.css')}}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='css/styles.css')}}" rel="stylesheet">
 
 
 </head>
@@ -36,9 +35,9 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top header-scrolled">
     <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo">
+      <h1 class="logo"><a href="{{ url_for('index')}}">
         <img src="{{ url_for('static', filename='assets/img/logo coconut1@4x (1).png')}}" alt="">
-      <a href="{{ url_for('index')}}"></a></h1>
+      </a></h1>
 
       <nav id="navbar" class="navbar">
         <ul>
@@ -57,7 +56,7 @@
 
   {% endblock %}
 
-  <script src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
   <!-- CONTACT END -->
 
   <!-- ======= Footer ======= -->
@@ -67,8 +66,8 @@
       <p>COMPUTER CLUB ORIENTED NETWORK UTILITY DAN TEKNOLOGI</p>
       <div class="social-links">
         <!-- <a href="#" class="youtube"><i class="bx bi-youtube"></i></a> -->
-        <a href="https://www.facebook.com/coconutcomputer" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="https://www.instagram.com/coconutdotorg/" class="instagram"><i class="bx bxl-instagram"></i></a>
+        <a href="https://www.facebook.com/coconutcomputer" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+        <a href="https://www.instagram.com/coconutdotorg/" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
         <!-- <a href="#" class="tiktok"><i class="bx bi-tiktok"></i></a> -->
       </div>
       <div class="copyright">
@@ -94,6 +93,8 @@
 
   <!-- Template Main JS File -->
   <script src="{{ url_for('static', filename='assets/js/main.js')}}"></script>
+  <script src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+
 
 </body>
 
