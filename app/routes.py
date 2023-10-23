@@ -24,7 +24,7 @@ def pendaftar():
 
 @app.route('/daftar')
 def daftar():
-	return render_template('daftar.html')
+	return render_template('daftar2.html')
 
 
 
