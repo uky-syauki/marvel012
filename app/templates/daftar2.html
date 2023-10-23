@@ -73,11 +73,12 @@
                                 <!-- Phone number input-->
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="nomor_wa" type="tel" placeholder="+62 812 4567 8910"
-                                        data-sb-validations="required" />
+                                        data-sb-validations="required" pattern="[0-9 ]+" />
                                     <label for="nomor_wa">Nomor Whatsapp</label>
-                                    <div class="invalid-feedback" data-sb-feedback="nomor_wa:required">Nomor Whatsapp Di
-                                        Butuhkan.</div>
+                                    <div class="invalid-feedback" data-sb-feedback="nomor_wa:required">Nomor Whatsapp Di Butuhkan.</div>
+                                    <div class="invalid-feedback" data-sb-feedback="nomor_wa:pattern">Hanya angka dan spasi yang diperbolehkan.</div>
                                 </div>
+                                
 
                                 <!-- alamat input-->
                                 <div class="form-floating mb-3">
@@ -114,9 +115,12 @@
 
                                 <!-- Input untuk memilih foto -->
                                 <div class="mb-3">
-                                    <label for="photo" class="form-label">Pilih Foto</label>
-                                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*" />
+                                    <label for="photo" class="form-label">Pilih Foto Anda (file .jpg | .jpeg | .png)</label>
+                                    <input type="file" class="form-control" id="photo" name="photo" accept=".jpg, .jpeg, .png" required />
+                                    <div class="invalid-feedback" data-sb-feedback="photo:required">Foto Anda diperlukan.</div>
+                                    <div class="invalid-feedback" data-sb-feedback="photo:accept">Hanya file .jpg, .jpeg, atau .png yang diperbolehkan.</div>
                                 </div>
+                                
 
                                 <!-- Input untuk memilih foto -->
                                 <!-- <div class="mb-3">
@@ -215,25 +219,25 @@
                 });
         }
 
-        function checkForm(id, val) {
+        // function checkForm(id, val) {
 
-            switch(id) {
-                case 'nama_lengkap':
-                    if(val !== '' && document.getElementById('alasan').value !== '') {
-                        document.getElementById('submitButton').classList.remove('disabled');
-                    } else {
-                        document.getElementById('submitButton').classList.add('disabled');                        
-                    }
-                    break;
-                case 'alasan':
-                    if(val !== '' && document.getElementById('nama_lengkap').value !== '') {
-                        document.getElementById('submitButton').classList.remove('disabled');
-                    } else {
-                        document.getElementById('submitButton').classList.add('disabled');                        
-                    }
-                    break;
-            }
-        }
+        //     switch(id) {
+        //         case 'nama_lengkap':
+        //             if(val !== '' && document.getElementById('alasan').value !== '') {
+        //                 document.getElementById('submitButton').classList.remove('disabled');
+        //             } else {
+        //                 document.getElementById('submitButton').classList.add('disabled');                        
+        //             }
+        //             break;
+        //         case 'alasan':
+        //             if(val !== '' && document.getElementById('nama_lengkap').value !== '') {
+        //                 document.getElementById('submitButton').classList.remove('disabled');
+        //             } else {
+        //                 document.getElementById('submitButton').classList.add('disabled');                        
+        //             }
+        //             break;
+        //     }
+        // }
 
         // Mendengarkan peristiwa saat formulir dikirimkan
         var form = document.getElementById('daftarForm');
@@ -245,6 +249,7 @@
         });
         // });
     </script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 
 {% endblock %}
